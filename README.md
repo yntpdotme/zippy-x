@@ -96,3 +96,7 @@ Discover the essence of productivity with Simply Todo, an elegant task organizat
 Contributions are always welcome!
 </br></br>
 
+## 🪪&nbsp;&nbsp; License
+
+ZippyX is open-source under the [MIT License](./LICENSE). 
+Feel free to learn, add upon, and share!
