@@ -17,7 +17,7 @@
 
 <h2 align="center">
 
- <img src = "./assets/eyes-to-see.gif" width = 26px align="top"/> &nbsp;[See it in Action]() &nbsp;»
+<img src = "./assets/eyes-to-see.gif" width = 26px align="top"/> &nbsp;[See it in Action]() &nbsp;»
 
 </h2>
 
@@ -58,11 +58,11 @@ Discover the essence of productivity with Simply Todo, an elegant task organizat
 
 - [Express](https://expressjs.com/) – framework
 
-- [React](https://react.dev/) – frontend 
+- [React](https://react.dev/) – frontend
 
 - [Node.js](https://nodejs.org/) – JavaScript runtime
 
-- [Tailwind CSS](https://tailwindcss.com/) – CSS 
+- [Tailwind CSS](https://tailwindcss.com/) – CSS
 
 - [Recoil](https://recoiljs.org/) – state management
 
@@ -94,9 +94,11 @@ Discover the essence of productivity with Simply Todo, an elegant task organizat
 ## 🤝&nbsp;&nbsp;Contributing
 
 Contributions are always welcome!
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for ways to get started.
 </br></br>
 
 ## 🪪&nbsp;&nbsp; License
 
-ZippyX is open-source under the [MIT License](./LICENSE). 
+ZippyX is open-source under the [MIT License](./LICENSE).
 Feel free to learn, add upon, and share!
