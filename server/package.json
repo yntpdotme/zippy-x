@@ -1,0 +1,32 @@
+{
+  "name": "zippy-x-server",
+  "version": "1.0.0",
+  "description": "This is backend for ZippyX App",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "npx nodemon --delay 500ms"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KadlagAkash/zippy-x/server"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "mongodb",
+    "docker"
+  ],
+  "author": "Akash Kadlag",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.13.0",
+    "winston-mongodb": "^5.1.1"
+  }
+}
