@@ -56,6 +56,12 @@ import {errorHandler} from './api/common/middlewares/index.js';
 // healthcheck
 app.use('/api/healthcheck', healthCheckRouter);
 
+// api v1 routes
+import {authRouter} from './api/v1/routes/index.js';
+
+// v1 apis
+app.use('/api/v1/auth', authRouter);
+
 // error handling middleware
 app.use(errorHandler);
 
