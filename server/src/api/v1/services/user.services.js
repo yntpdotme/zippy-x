@@ -73,9 +73,22 @@ const signInUser = async (email, password) => {
   return {user: signedInUser, accessToken, refreshToken};
 };
 
+const signOutUser = id => {
+  return User.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        refreshToken: '',
+      },
+    },
+    {new: true}
+  );
+};
+
 const userService = {
   register: registerUser,
   signIn: signInUser,
+  signOut: signOutUser,
 };
 
 export {userService};

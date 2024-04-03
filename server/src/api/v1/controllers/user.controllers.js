@@ -62,4 +62,19 @@ const authenticateUser = asyncHandler(async (req, res) => {
     );
 });
 
-export {registerUser, authenticateUser};
+const unauthenticateUser = asyncHandler(async (req, res) => {
+  await userService.signOut(req.user._id);
+
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+  };
+
+  return res
+    .status(200)
+    .clearCookie('accessToken', options)
+    .clearCookie('refreshToken', options)
+    .json(new ApiResponse(200, {}, 'User Signed out'));
+});
+
+export {registerUser, authenticateUser, unauthenticateUser};

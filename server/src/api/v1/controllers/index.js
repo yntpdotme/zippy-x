@@ -1,3 +1,7 @@
-import {registerUser, authenticateUser} from './user.controllers.js';
+import {
+  registerUser,
+  authenticateUser,
+  unauthenticateUser,
+} from './user.controllers.js';
 
-export {registerUser, authenticateUser};
+export {registerUser, authenticateUser, unauthenticateUser};
