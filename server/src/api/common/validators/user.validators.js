@@ -44,8 +44,24 @@ const userRegisterValidator = user => {
   return schema.safeParse(user);
 };
 
+const userSigninValidator = user => {
+  const schema = z
+    .object({
+      email: z
+        .string({required_error: 'Email is required'})
+        .email('Please enter a valid email address'),
+      password: z
+        .string({required_error: 'Password is required'})
+        .min(1, 'Password is required'),
+    })
+    .strict();
+
+  return schema.safeParse(user);
+};
+
 const userValidator = {
   ValidateRegister: userRegisterValidator,
+  ValidateSignIn: userSigninValidator,
 };
 
 export default userValidator;
