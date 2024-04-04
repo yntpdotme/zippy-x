@@ -59,9 +59,7 @@ const userSigninValidator = user => {
   return schema.safeParse(user);
 };
 
-const userValidator = {
+export const authValidator = {
   ValidateRegister: userRegisterValidator,
   ValidateSignIn: userSigninValidator,
 };
-
-export default userValidator;

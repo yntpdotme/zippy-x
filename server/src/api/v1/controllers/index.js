@@ -1,8 +1,3 @@
-import {
-  registerUser,
-  authenticateUser,
-  unauthenticateUser,
-  refreshAccessToken,
-} from './user.controllers.js';
+import {authController} from './auth.controller.js';
 
-export {registerUser, authenticateUser, unauthenticateUser, refreshAccessToken};
+export {authController};

@@ -1,14 +1,11 @@
 import express from 'express';
 
-import {
-  registerUser,
-  authenticateUser,
-  unauthenticateUser,
-  refreshAccessToken,
-} from '../controllers/index.js';
+import {authController} from '../controllers/index.js';
 import {authorization} from '../../common/middlewares/auth.middlewares.js';
 
 const router = express.Router();
+
+const {registerUser, authenticateUser, unauthenticateUser, refreshAccessToken} = authController;
 
 router
   .route('/signup')

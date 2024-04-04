@@ -1,8 +1,8 @@
 import {ApiError, ApiResponse, asyncHandler} from '../../common/utils/index.js';
-import {userValidator} from '../../common/validators/index.js';
-import {userService} from '../services/index.js';
+import {authValidator} from '../../common/validators/index.js';
+import {authService} from '../services/index.js';
 
-const {ValidateRegister, ValidateSignIn} = userValidator;
+const {ValidateRegister, ValidateSignIn} = authValidator;
 
 const registerUser = asyncHandler(async (req, res) => {
   const {error} = ValidateRegister(req.body);
@@ -10,7 +10,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const {name, email, password} = req.body;
 
-  const {user, accessToken, refreshToken} = await userService.register(
+  const {user, accessToken, refreshToken} = await authService.register(
     name,
     email,
     password
@@ -40,7 +40,7 @@ const authenticateUser = asyncHandler(async (req, res) => {
 
   const {email, password} = req.body;
 
-  const {user, accessToken, refreshToken} = await userService.signIn(
+  const {user, accessToken, refreshToken} = await authService.signIn(
     email,
     password
   );
@@ -63,7 +63,7 @@ const authenticateUser = asyncHandler(async (req, res) => {
 });
 
 const unauthenticateUser = asyncHandler(async (req, res) => {
-  await userService.signOut(req.user._id);
+  await authService.signOut(req.user._id);
 
   const options = {
     httpOnly: true,
@@ -81,7 +81,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
 
-  const {accessToken, newRefreshToken} = await userService.refreshToken(
+  const {accessToken, newRefreshToken} = await authService.refreshToken(
     incomingRefreshToken
   );
 
@@ -101,4 +101,9 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     });
 });
 
-export {registerUser, authenticateUser, unauthenticateUser, refreshAccessToken};
+export const authController = {
+  registerUser,
+  authenticateUser,
+  unauthenticateUser,
+  refreshAccessToken,
+};

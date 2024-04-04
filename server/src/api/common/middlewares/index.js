@@ -1,4 +1,4 @@
-import {errorHandler} from './error.middlewares.js';
-import {authorization} from './auth.middlewares.js';
+import {errorHandler} from './error.middleware.js';
+import {authorization} from './auth.middleware.js';
 
 export {errorHandler, authorization};

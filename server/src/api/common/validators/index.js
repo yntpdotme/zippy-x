@@ -1,3 +1,3 @@
-import userValidator from './user.validators.js';
+import {authValidator} from './auth.validator.js';
 
-export {userValidator};
+export {authValidator};

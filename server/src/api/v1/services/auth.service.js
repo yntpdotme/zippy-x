@@ -117,11 +117,9 @@ const refreshAccessToken = async refreshToken => {
   }
 };
 
-const userService = {
+export const authService = {
   register: registerUser,
   signIn: signInUser,
   signOut: signOutUser,
   refreshToken: refreshAccessToken,
 };
-
-export {userService};

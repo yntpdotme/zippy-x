@@ -1,3 +1,3 @@
-import {userService} from './user.services.js';
+import {authService} from './auth.service.js';
 
-export {userService};
+export {authService};
