@@ -2,6 +2,7 @@ import {
   registerUser,
   authenticateUser,
   unauthenticateUser,
+  refreshAccessToken,
 } from './user.controllers.js';
 
-export {registerUser, authenticateUser, unauthenticateUser};
+export {registerUser, authenticateUser, unauthenticateUser, refreshAccessToken};

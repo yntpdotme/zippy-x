@@ -4,8 +4,9 @@ import {
   registerUser,
   authenticateUser,
   unauthenticateUser,
+  refreshAccessToken,
 } from '../controllers/index.js';
-import { authorization } from '../../common/middlewares/auth.middlewares.js';
+import {authorization} from '../../common/middlewares/auth.middlewares.js';
 
 const router = express.Router();
 
@@ -20,5 +21,9 @@ router
 router
   .route('/signout')
   .get(authorization, unauthenticateUser);
+
+router
+  .route('/refresh')
+  .post(refreshAccessToken);
 
 export default router;

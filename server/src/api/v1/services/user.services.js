@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 import {User} from '../../common/models/index.js';
 import {ApiError, getAvatarName} from '../../common/utils/index.js';
 
@@ -85,10 +87,41 @@ const signOutUser = id => {
   );
 };
 
+const refreshAccessToken = async refreshToken => {
+  if (!refreshToken) {
+    throw new ApiError(401, 'Unauthorized request');
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    const user = await User.findById(decodedToken?._id);
+    if (!user) {
+      throw new ApiError(401, 'Invalid refresh token');
+    }
+
+    if (refreshToken !== user?.refreshToken) {
+      // If token is valid but is used already
+      throw new ApiError(401, 'Refresh token is expired or used');
+    }
+
+    const {accessToken, refreshToken: newRefreshToken} =
+      await generateAccessAndRefreshTokens(user._id);
+
+    return {accessToken, newRefreshToken};
+  } catch (error) {
+    throw new ApiError(401, error?.message || 'Invalid refresh token');
+  }
+};
+
 const userService = {
   register: registerUser,
   signIn: signInUser,
   signOut: signOutUser,
+  refreshToken: refreshAccessToken,
 };
 
 export {userService};

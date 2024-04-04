@@ -77,4 +77,28 @@ const unauthenticateUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, 'User Signed out'));
 });
 
-export {registerUser, authenticateUser, unauthenticateUser};
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  const incomingRefreshToken =
+    req.cookies.refreshToken || req.body.refreshToken;
+
+  const {accessToken, newRefreshToken} = await userService.refreshToken(
+    incomingRefreshToken
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+  };
+
+  return res
+    .status(200)
+    .cookie('accessToken', accessToken, options)
+    .cookie('refreshToken', newRefreshToken, options)
+    .json({
+      accessToken,
+      refreshToken: newRefreshToken,
+      message: 'Access token refreshed',
+    });
+});
+
+export {registerUser, authenticateUser, unauthenticateUser, refreshAccessToken};
