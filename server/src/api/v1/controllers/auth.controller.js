@@ -101,9 +101,30 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     });
 });
 
+const handleSocialSignIn = asyncHandler(async (req, res) => {
+  const {accessToken, refreshToken} = await authService.socialSignIn(
+    req.user?._id
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+  };
+
+  return res
+    .status(301)
+    .cookie('accessToken', accessToken, options)
+    .cookie('refreshToken', refreshToken, options)
+    .redirect(
+      // redirect user to the frontend with access and refresh token in case user is not using cookies
+      `${process.env.CLIENT_SSO_REDIRECT_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}`
+    );
+});
+
 export const authController = {
   registerUser,
   authenticateUser,
   unauthenticateUser,
   refreshAccessToken,
+  handleSocialSignIn,
 };

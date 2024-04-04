@@ -31,6 +31,11 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  signInType: {
+    type: String,
+    enum: ['Email-Password', 'Google'],
+    default: 'Email-Password',
+  },
 });
 
 userSchema.pre('save', async function (next) {

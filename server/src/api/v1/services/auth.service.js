@@ -37,6 +37,7 @@ const registerUser = async (name, email, password) => {
     email,
     password,
     avatar,
+    signInType: 'Email-Password',
   });
 
   const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
@@ -117,9 +118,21 @@ const refreshAccessToken = async refreshToken => {
   }
 };
 
+const handleSocialSignIn = async userId => {
+  const user = await User.findById(userId);
+  if (!user) throw new ApiError(404, 'User does not exists');
+
+  const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
+    userId
+  );
+
+  return {accessToken, refreshToken};
+};
+
 export const authService = {
   register: registerUser,
   signIn: signInUser,
   signOut: signOutUser,
   refreshToken: refreshAccessToken,
+  socialSignIn: handleSocialSignIn,
 };

@@ -6,6 +6,8 @@ import compression from 'compression';
 import hpp from 'hpp';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
 
 import {morganMiddleware} from './config/index.js';
 import {ApiError} from './api/common/utils/ApiError.js';
@@ -47,6 +49,15 @@ app.use(requestIp.mw());
 app.use('/api/', limiter);
 app.use(express.json({limit: '16kb'}));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.EXPRESS_SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
+); // required for passport
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 app.use(morganMiddleware);
 
 // api routes

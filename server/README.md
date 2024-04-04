@@ -48,6 +48,22 @@ The server provides follwing API endpoints:
 
 - Description: Refreshes the access token.
 
+### - Google SSO (Single Sign-On)
+
+- Endpoint: `/api/v1/auth/google`
+
+- Method: `GET`
+
+- Description: Initiate authentication with Google OAuth.
+
+### - Google Auth Callback
+
+- Endpoint: `/api/v1/auth/google/callback`
+
+- Method: `GET`
+
+- Description: Callback route after Google authentication.
+
 <br>
 
 ## User Management &nbsp;👤
