@@ -1,7 +1,7 @@
 import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 
-import {User} from '../models/index.js';
+import {User, Wallet} from '../models/index.js';
 import {ApiError} from '../utils/index.js';
 
 passport.serializeUser((user, next) => {
@@ -53,6 +53,11 @@ passport.use(
           password: profile._json.sub,
           avatar: profile._json.picture,
           signInType: 'Google',
+        });
+
+        await Wallet.create({
+          userId: newUser._id,
+          balance: Math.random() * 999 + 1,
         });
 
         if (newUser) return next(null, newUser);

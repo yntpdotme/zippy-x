@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import {User} from '../../common/models/index.js';
+import {User, Wallet} from '../../common/models/index.js';
 import {ApiError, getAvatarName} from '../../common/utils/index.js';
 
 const generateAccessAndRefreshTokens = async userId => {
@@ -38,6 +38,11 @@ const registerUser = async (name, email, password) => {
     password,
     avatar,
     signInType: 'Email-Password',
+  });
+
+  await Wallet.create({
+    userId: user._id,
+    balance: Math.random() * 999 + 1,
   });
 
   const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
