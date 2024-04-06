@@ -31,6 +31,14 @@ const updateCurrentUser = async (userId, userData) => {
   const user = await User.findById(userId);
 
   if (oldPassword && newPassword) {
+    if (user.signInType !== 'Email-Password') {
+      // If the user is registered with a method other than Email-Password, changing the password is not applicable
+      throw new ApiError(
+        400,
+        `Changing the password is not applicable for accounts registered with ${user.signInType}.`
+      );
+    }
+
     const isPasswordValid = await user.isPasswordCorrect(oldPassword);
     if (!isPasswordValid) {
       throw new ApiError(400, 'Invalid old password');
