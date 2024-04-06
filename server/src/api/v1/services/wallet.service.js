@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import {Wallet} from '../../common/models/index.js';
+import {Wallet, Transaction} from '../../common/models/index.js';
 import {ApiError} from '../../common/utils/index.js';
 
 const getWalletData = async userId => {
@@ -11,11 +11,21 @@ const depositeAmount = async (userId, amount) => {
   const wallet = await Wallet.findOneAndUpdate(
     {userId: userId},
     {$inc: {balance: amount}},
-    { new: true }
+    {new: true}
   ).populate('userId');
 
   // Calculate gain
   const gainInBalance = await wallet.depositGain(amount);
+
+  // ADMIN_ID must come from DB. Hardcoding it for testing.
+  const ADMIN_ID = '65ffe9ec8d4a1398face07e2';
+
+  // Store deposit data
+  await Transaction.create({
+    senderId: ADMIN_ID, // system-generated funds
+    recipientId: userId,
+    amount: amount,
+  });
 
   return {wallet, gainInBalance};
 };
@@ -58,6 +68,13 @@ const transferAmount = async (senderId, recipientId, amount) => {
     // Calculate gain
     await senderWallet.transferGain(-amount, {session});
     await recipientWallet.transferGain(amount, {session});
+
+    // Store tranfer data
+    await Transaction.create({
+      senderId,
+      recipientId,
+      amount,
+    });
 
     // Commit the transaction
     await session.commitTransaction();
