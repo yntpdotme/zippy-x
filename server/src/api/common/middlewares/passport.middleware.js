@@ -38,7 +38,7 @@ passport.use(
             return next(
               new ApiError(
                 400,
-                `You have registered using ${signInType}. Please use ${signInType} as the login option.`
+                `You have registered using ${signInType}. Please use ${signInType} as the signin option.`
               ),
               null
             );

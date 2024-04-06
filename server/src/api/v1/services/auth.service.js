@@ -62,11 +62,21 @@ const registerUser = async (name, email, password) => {
 
 const signInUser = async (email, password) => {
   const user = await User.findOne({email});
-  if (!user) throw new ApiError(401, 'Email and password do not match');
+  if (!user) throw new ApiError(400, 'Email and password do not match');
+
+  if (user.signInType !== 'Email-Password') {
+    /* If user is registered with some other method, we will ask him/her to use the same method as registered.
+      This shows that if user is registered with methods other than email password, 
+      he / she will not be able to login with password. Which makes password field redundant for the SSO */
+    throw new ApiError(
+      400,
+      `You have registered using ${user.signInType}. Please use ${user.signInType} as the signin option.`
+    );
+  }
 
   const isPasswordValid = await user.isPasswordCorrect(password);
   if (!isPasswordValid) {
-    throw new ApiError(401, 'Email and password do not match');
+    throw new ApiError(400, 'Email and password do not match');
   }
 
   const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
