@@ -1,6 +1,20 @@
-# Backend
+<br>
+<h1 align="center">ZippyX Backend</h1>
 
-The server provides follwing API endpoints:
+<h3 align="center">
+
+ <img src = "../assets/docs.gif" width = 32px align="top"/>&nbsp;[API Docs](https://documenter.getpostman.com/view/31850881/2sA3BuXpVE) &nbsp;» &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; «[&nbsp; Source Code &nbsp;](../server/)<img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 23px align="top"/> 
+ 
+</h3>
+<br>
+
+- This codebase contains the backend logic for the **ZippyX** application.
+
+- Dive into the codebase to explore the inner workings of Zippy's backend.
+
+<br>
+
+~ Endpoints ~
 
 ## Server Health 🛠️
 
@@ -76,6 +90,13 @@ The server provides follwing API endpoints:
 
 - Description: Retrieve all users.
 
+- Query Parameters:
+  - `page`: Page number (default: 1)
+
+  - `limit`: Number of items per page (default: 10)
+
+  - `filter`: Optional filter criteria (by name)
+
 ### - Get Current User
 
 - Endpoint: `/api/v1/users/me`
@@ -132,4 +153,48 @@ The server provides follwing API endpoints:
 
 - Description: Allowed authenticated users to see their past transactions.
 
+- Query Parameters:
+  - `page`: Page number (default: 1)
+
+  - `limit`: Number of items per page (default: 10)
+
 <br>
+
+<h2 >🖥️&nbsp;&nbsp; Local Development</h2>
+
+1. **Navigate to the Backend Codebase:**
+
+   ```bash
+   cd server/
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Add Environment Variables:**
+
+   Create .env file in the root folder and copy paste the content of .env.sample.
+
+   ```bash
+   cp .env.sample .env
+   ```
+
+   If required, add necessary credentials.
+
+4. **Start the Server:**
+
+   ```bash
+   npm start
+   ```
+
+5. **Explore the API:**
+
+   Access the project APIs at the specified endpoints using [API Docs](https://documenter.getpostman.com/view/31850881/2sA3BuXpVE).
+
+<br><br>
+
+
+Feel free to explore backend APIs implementation and run it locally to verify it's correctness. Happy coding!
