@@ -1,7 +1,24 @@
 version: '3.8'
 
 services:
-  server:
+  web:
+    build: ./client
+    container_name: zippyx-client
+    ports:
+      - '5173:5173'
+    env_file:
+      - ./client/.env
+    depends_on:
+      - api
+    develop:
+      watch:
+        - action: sync
+          path: ./client
+          target: /app
+        - action: rebuild
+          path: ./server/package*.json
+
+  api:
     build: ./server
     container_name: zippyx-server
     command: npm run dev
@@ -17,7 +34,7 @@ services:
           path: ./server/src
           target: /app/src
         - action: rebuild
-          path: ./server/package.json
+          path: ./server/package*.json
 
   db:
     image: mongo:latest
