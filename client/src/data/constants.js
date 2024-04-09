@@ -1,0 +1,1 @@
+export const sourceCodeLink = 'https://github.com/KadlagAkash/zippy-x#zippy-x';
