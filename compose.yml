@@ -16,7 +16,7 @@ services:
           path: ./client
           target: /app
         - action: rebuild
-          path: ./server/package*.json
+          path: ./client/package*.json
 
   api:
     build: ./server
