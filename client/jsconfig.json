@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "module": "ES6",
     "paths": {
+      "@assets": ["/src/assets/*"],
       "@components": ["/src/components/*"],
       "@features": ["/src/features/*"],
       "@hooks": ["/src/hooks/*"],

@@ -9,6 +9,7 @@ import {
   Transactions,
   Profile,
 } from '@pages';
+import {ThemeToggler} from '@components';
 
 const App = () => {
   return (
@@ -23,6 +24,10 @@ const App = () => {
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
+
+        <div className="pointer-events-auto absolute right-0 top-6 px-2 py-3 lg:right-5">
+          <ThemeToggler />
+        </div>
       </div>
     </>
   );
