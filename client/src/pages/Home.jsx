@@ -6,7 +6,7 @@ import {rightArrow, wallet} from '@assets';
 const Home = () => {
   const navigate = useNavigate();
   const handleSetStarted = () => {
-    navigate('/signup');
+    navigate('/signin');
   };
 
   return (
@@ -33,7 +33,7 @@ const Home = () => {
         </h2>
         <Button
           onClick={handleSetStarted}
-          label="Sign Up for Free"
+          label="Get Started"
           icon={rightArrow}
           corners="full"
           variant="hero"

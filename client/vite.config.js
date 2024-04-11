@@ -13,7 +13,6 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@services': '/src/services',
       '@recoil': '/src/recoil',
-      '@validators': '/src/validators',
     },
   },
 });
