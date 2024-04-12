@@ -13,7 +13,7 @@ const Button = ({
   const variantClasses = {
     secondary: `border border-input text-gray-600 ring-primary/70 hover:border-gray-300 hover:bg-gray-50 focus:ring-2  focus-visible:ring-2 focus-visible:ring-ring dark:border-dark-800 dark:text-gray-200 dark:ring-primary/70 dark:hover:border-dark-800 dark:hover:bg-background/50 dark:focus:ring-offset-dark-800`,
     primary: `bg-primary text-white`,
-    hero: `bg-transparent from-primary to-primary-700 hover:shadow-primary/60 bg-gradient-to-r px-8 py-4 hover:to-indigo-600 text-lg lg:text-xl`,
+    hero: `bg-transparent from-primary to-primary-700 hover:shadow-primary/60 bg-gradient-to-r px-8 py-4 hover:to-indigo-600 text-lg lg:text-xl text-white`,
   };
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${corners && `rounded-${corners}`} ${fullWidth && 'w-full'}`;

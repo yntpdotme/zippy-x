@@ -1,3 +1,3 @@
-import {GoogleSignin, SignupForm, GuestSignin} from './components';
+import {GoogleSignin, SignupForm, SigninForm, GuestSignin} from './components';
 
-export {GoogleSignin, SignupForm, GuestSignin};
+export {GoogleSignin, SignupForm, SigninForm, GuestSignin};
