@@ -77,6 +77,12 @@ const unauthenticateUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, 'User Signed out'));
 });
 
+const getAuthStatus = (req, res) => {
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {authenticated: true}, 'Success'));
+};
+
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
@@ -125,6 +131,7 @@ export const authController = {
   registerUser,
   authenticateUser,
   unauthenticateUser,
+  getAuthStatus,
   refreshAccessToken,
   handleSocialSignIn,
 };

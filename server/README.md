@@ -3,8 +3,8 @@
 
 <h3 align="center">
 
- <img src = "../assets/docs.gif" width = 32px align="top"/>&nbsp;[API Docs](https://documenter.getpostman.com/view/31850881/2sA3BuXpVE) &nbsp;» &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; «[&nbsp; Source Code &nbsp;](../server/)<img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 23px align="top"/> 
- 
+<img src = "../assets/docs.gif" width = 32px align="top"/>&nbsp;[API Docs](https://documenter.getpostman.com/view/31850881/2sA3BuXpVE) &nbsp;» &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; «[&nbsp; Source Code &nbsp;](../server/)<img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 23px align="top"/>
+
 </h3>
 <br>
 
@@ -54,6 +54,14 @@
 
 - Description: Sign out the authenticated user session.
 
+### - Authentication Status
+
+- Endpoint: `/api/v1/auth/status`
+
+- Method: `GET`
+
+- Description: Check the authentication status of the user.
+
 ### - Refresh Token
 
 - Endpoint: `/api/v1/auth/refresh`
@@ -91,6 +99,7 @@
 - Description: Retrieve all users.
 
 - Query Parameters:
+
   - `page`: Page number (default: 1)
 
   - `limit`: Number of items per page (default: 10)
@@ -154,6 +163,7 @@
 - Description: Allowed authenticated users to see their past transactions.
 
 - Query Parameters:
+
   - `page`: Page number (default: 1)
 
   - `limit`: Number of items per page (default: 10)
@@ -195,6 +205,5 @@
    Access the project APIs at the specified endpoints using [API Docs](https://documenter.getpostman.com/view/31850881/2sA3BuXpVE).
 
 <br><br>
-
 
 Feel free to explore backend APIs implementation and run it locally to verify it's correctness. Happy coding!

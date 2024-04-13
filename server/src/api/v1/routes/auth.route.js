@@ -9,6 +9,7 @@ const {
   registerUser,
   authenticateUser,
   unauthenticateUser,
+  getAuthStatus,
   refreshAccessToken,
   handleSocialSignIn,
 } = authController;
@@ -24,6 +25,10 @@ router
 router
   .route('/signout')
   .get(authorization, unauthenticateUser);
+
+router
+  .route('/status')
+  .get(authorization, getAuthStatus)
 
 router
   .route('/refresh')
