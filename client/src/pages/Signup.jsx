@@ -1,11 +1,18 @@
 import {Link, useNavigate} from 'react-router-dom';
 
-import {GoogleSignin, SignupForm, GuestSignin} from '@features/authentication';
+import {
+  GoogleSignin,
+  SignupForm,
+  GuestSignin,
+  AuthService,
+} from '@features/authentication';
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const handleSignup = async () => {
+  const handleSignup = async formData => {
+    await AuthService.signup(formData);
+
     navigate('/dashboard');
   };
 
@@ -15,7 +22,7 @@ const Signup = () => {
         <Link to="/">ZippyX</Link>
       </p>
 
-      <div className="mt-16 sm:mt-0 flex w-full max-w-[28rem] flex-col items-center space-y-2 rounded-xl border-transparent bg-white px-5 py-6 dark:bg-transparent md:border md:px-8 dark:md:shadow-[0_0_1200px_0] dark:md:shadow-primary/30 lg:bg-background lg:px-6 dark:lg:border-dark-800">
+      <div className="mt-16 flex w-full max-w-[28rem] flex-col items-center space-y-2 rounded-xl border-transparent bg-white px-5 py-6 dark:bg-transparent sm:mt-0 md:border md:px-8 dark:md:shadow-[0_0_1200px_0] dark:md:shadow-primary/30 lg:bg-background lg:px-6 dark:lg:border-dark-800">
         <div>
           <h5 className="mb-4 font-palanquin text-xl font-medium">
             Create an account

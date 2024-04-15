@@ -29,6 +29,10 @@ const SignupForm = ({onSubmit, buttonText}) => {
     } catch (error) {
       let errorMessage = 'An unexpected error occurred. Please try again.';
 
+      if (error?.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+
       setError('message', {
         type: 'manual',
         message: errorMessage,
