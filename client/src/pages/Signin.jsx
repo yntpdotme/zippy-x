@@ -1,11 +1,18 @@
 import {Link, useNavigate} from 'react-router-dom';
 
-import {GoogleSignin, SigninForm, GuestSignin} from '@features/authentication';
+import {
+  GoogleSignin,
+  SigninForm,
+  GuestSignin,
+  AuthService,
+} from '@features/authentication';
 
 const Signin = () => {
   const navigate = useNavigate();
 
-  const handleSignin = async () => {
+  const handleSignin = async formData => {
+    await AuthService.signin(formData);
+
     navigate('/dashboard');
   };
 
