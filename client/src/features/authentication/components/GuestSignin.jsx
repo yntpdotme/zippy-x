@@ -1,10 +1,13 @@
 import {useNavigate} from 'react-router-dom';
+import {useRecoilState} from 'recoil';
 
+import {snackbarState} from '@recoil/atoms';
 import {AuthService} from '@features/authentication';
-import {Button} from '@components/ui';
+import {Button, ErrorSnackbar} from '@components/ui';
 
 const GuestSignin = ({label}) => {
   const navigate = useNavigate();
+  const [showSnackbar, setShowSnackbar] = useRecoilState(snackbarState);
 
   const handleGuestSignIn = async () => {
     try {
@@ -17,6 +20,8 @@ const GuestSignin = ({label}) => {
 
       navigate('/dashboard');
     } catch (error) {
+      setShowSnackbar(true);
+
       let errorMessage = 'An unexpected error occurred.';
 
       if (error?.response?.data?.message) {
@@ -24,6 +29,8 @@ const GuestSignin = ({label}) => {
       }
 
       console.log(errorMessage);
+    } finally {
+      setTimeout(() => setShowSnackbar(false), 2000);
     }
   };
 
@@ -35,6 +42,10 @@ const GuestSignin = ({label}) => {
         label={label || 'Sign In as Guest'}
         fullWidth
       />
+
+      {showSnackbar && (
+        <ErrorSnackbar label="Sorry, guest sign-in is currently unavailable. Please try later." />
+      )}
     </>
   );
 };

@@ -6,6 +6,7 @@ import wallet from './wallet.gif';
 import openEyeIcon from './open-eye.svg';
 import closeEyeIcon from './close-eye.svg';
 import googleLogo from './google.svg';
+import closeIcon from './close.svg';
 
 export {
   sunIcon,
@@ -16,4 +17,5 @@ export {
   openEyeIcon,
   closeEyeIcon,
   googleLogo,
+  closeIcon,
 };

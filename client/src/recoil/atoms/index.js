@@ -1,3 +1,4 @@
 import {themeState} from './themeState';
+import {snackbarState} from './snackbarState';
 
-export {themeState};
+export {themeState, snackbarState};

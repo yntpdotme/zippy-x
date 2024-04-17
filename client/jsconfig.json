@@ -10,6 +10,7 @@
       "@hooks": ["/src/hooks/*"],
       "@pages": ["/src/pages/*"],
       "@services": ["/src/services/*"],
+      "@recoil": ["/src/recoil/*"],
     }
   }
 }
