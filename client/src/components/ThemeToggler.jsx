@@ -19,7 +19,7 @@ const ThemeToggler = () => {
   };
 
   return (
-    <div className="mr-2 flex items-start justify-end max-lg:mr-5 max-lg:flex-1">
+    <div className="mr-2 flex items-start justify-end hover:cursor-pointer max-lg:mr-5 max-lg:flex-1">
       <img
         src={theme === 'dark' ? sunIcon : moonIcon}
         alt="ThemeToggler"

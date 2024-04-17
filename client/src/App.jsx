@@ -18,20 +18,18 @@ const App = () => {
     <>
       <section className="flex">
         <main className="max-container relative h-screen basis-full overflow-y-auto">
-          <div className="flex h-screen items-center justify-center">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signin" element={<Signin />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/transfer" element={<Transfer />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/transfer" element={<Transfer />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
 
-            <div className="pointer-events-auto absolute right-0 top-6 px-2 py-3.5 lg:right-5">
-              <ThemeToggler />
-            </div>
+          <div className="pointer-events-auto absolute right-0 top-6 px-2 py-3.5 lg:right-5">
+            <ThemeToggler />
           </div>
 
           <SourceCode link={sourceCodeLink} icon={githubLogo} />
