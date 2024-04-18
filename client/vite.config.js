@@ -10,6 +10,7 @@ export default defineConfig({
       '@data': '/src/data',
       '@features': '/src/features',
       '@hooks': '/src/hooks',
+      '@layouts': '/src/layouts',
       '@pages': '/src/pages',
       '@services': '/src/services',
       '@recoil': '/src/recoil',

@@ -7,6 +7,7 @@ import openEyeIcon from './open-eye.svg';
 import closeEyeIcon from './close-eye.svg';
 import googleLogo from './google.svg';
 import closeIcon from './close.svg';
+import hamburgerMenu from './hamburger-menu.svg';
 
 export {
   sunIcon,
@@ -18,4 +19,5 @@ export {
   closeEyeIcon,
   googleLogo,
   closeIcon,
+  hamburgerMenu,
 };

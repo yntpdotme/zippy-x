@@ -1,5 +1,6 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 
+import {NavBar} from '@layouts';
 import {
   Home,
   Signin,
@@ -14,10 +15,20 @@ import {sourceCodeLink} from '@data/constants';
 import {githubLogo} from '@assets';
 
 const App = () => {
+  const location = useLocation();
+
+  const renderNavigation = !['/', '/signin', '/signup'].includes(
+    location.pathname,
+  );
+
   return (
     <>
+      <header>{renderNavigation && <NavBar />}</header>
+
       <section className="flex">
-        <main className="max-container relative h-screen basis-full overflow-y-auto">
+        <main
+          className={`h-[100vh-73px] basis-full overflow-y-auto lg:h-screen ${!renderNavigation && `max-container relative`}`}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<Signin />} />
@@ -28,9 +39,11 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
           </Routes>
 
-          <div className="pointer-events-auto absolute right-0 top-6 px-2 py-3.5 lg:right-5">
-            <ThemeToggler />
-          </div>
+          {!renderNavigation && (
+            <div className="pointer-events-auto absolute right-0 top-6 px-2 py-3.5 lg:right-5">
+              <ThemeToggler />
+            </div>
+          )}
 
           <SourceCode link={sourceCodeLink} icon={githubLogo} />
         </main>
