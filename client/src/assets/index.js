@@ -8,6 +8,11 @@ import closeEyeIcon from './close-eye.svg';
 import googleLogo from './google.svg';
 import closeIcon from './close.svg';
 import hamburgerMenu from './hamburger-menu.svg';
+import signOutIcon from './sign-out.svg';
+import dashboardIcon from './dashboard.svg';
+import transferIcon from './transfer.svg';
+import profileIcon from './profile.svg';
+import transactionsIcon from './transactions.svg';
 
 export {
   sunIcon,
@@ -20,4 +25,9 @@ export {
   googleLogo,
   closeIcon,
   hamburgerMenu,
+  signOutIcon,
+  dashboardIcon,
+  transferIcon,
+  profileIcon,
+  transactionsIcon,
 };

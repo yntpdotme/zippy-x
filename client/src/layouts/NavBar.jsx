@@ -1,9 +1,14 @@
 import {Link} from 'react-router-dom';
+import {useRecoilState} from 'recoil';
 
 import {hamburgerMenu} from '@assets';
 import {ThemeToggler} from '@components';
+import {dropdownState} from '@recoil/atoms';
+import Dropdown from './Dropdown';
 
 const NavBar = () => {
+  const [showDropDrown, setShowDropDown] = useRecoilState(dropdownState);
+
   return (
     <>
       <nav className="relative z-10 lg:hidden">
@@ -13,7 +18,7 @@ const NavBar = () => {
           </div>
           <div className="flex items-center">
             <ThemeToggler />
-            <button>
+            <button onClick={() => setShowDropDown(!showDropDrown)}>
               <img
                 src={hamburgerMenu}
                 alt="hamburger menu"
@@ -22,6 +27,7 @@ const NavBar = () => {
             </button>
           </div>
         </div>
+        {showDropDrown && <Dropdown />}
       </nav>
     </>
   );
