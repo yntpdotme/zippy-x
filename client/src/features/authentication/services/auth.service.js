@@ -1,4 +1,4 @@
-import {publicClient as apiClient, privateClient} from '@services';
+import {privateClient as apiClient} from '@services';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -7,9 +7,9 @@ const AuthService = {
 
   signin: formData => apiClient.post('/auth/signin', formData),
 
-  signout: () => privateClient.get('/auth/signout'),
+  signout: () => apiClient.get('/auth/signout'),
 
-  checkAuthStatus: () => privateClient.get('/auth/status'),
+  checkAuthStatus: () => apiClient.get('/auth/status'),
 
   googleSignin: () =>
     window.open(
