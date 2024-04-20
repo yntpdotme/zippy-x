@@ -1,6 +1,6 @@
 import {Route, Routes, useLocation} from 'react-router-dom';
 
-import {NavBar} from '@layouts';
+import {NavBar, SideBar} from '@layouts';
 import {
   Home,
   Signin,
@@ -26,6 +26,12 @@ const App = () => {
       <header>{renderNavigation && <NavBar />}</header>
 
       <section className="flex">
+        {renderNavigation && (
+          <aside>
+            <SideBar />
+          </aside>
+        )}
+
         <main
           className={`h-[100vh-73px] basis-full overflow-y-auto lg:h-screen ${!renderNavigation && `max-container relative`}`}
         >

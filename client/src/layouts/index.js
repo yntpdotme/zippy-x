@@ -1,3 +1,4 @@
 import NavBar from './NavBar';
+import SideBar from './SideBar';
 
-export {NavBar};
+export {NavBar, SideBar};

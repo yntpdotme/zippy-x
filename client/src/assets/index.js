@@ -13,6 +13,8 @@ import dashboardIcon from './dashboard.svg';
 import transferIcon from './transfer.svg';
 import profileIcon from './profile.svg';
 import transactionsIcon from './transactions.svg';
+import openSideBar from './open-sidebar.svg';
+import closeSideBar from './close-sidebar.svg';
 
 export {
   sunIcon,
@@ -30,4 +32,6 @@ export {
   transferIcon,
   profileIcon,
   transactionsIcon,
+  openSideBar,
+  closeSideBar,
 };
