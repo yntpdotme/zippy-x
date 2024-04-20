@@ -1,5 +1,6 @@
 import {useSetRecoilState} from 'recoil';
 import {useNavigate} from 'react-router-dom';
+import {useQueryClient} from '@tanstack/react-query';
 
 import {dropdownState} from '@recoil/atoms';
 import {AuthService} from '@features/authentication';
@@ -10,11 +11,13 @@ import {signOutIcon} from '@assets';
 const Dropdown = () => {
   const setShowDropDown = useSetRecoilState(dropdownState);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const handleSignOut = async () => {
     try {
       await AuthService.signout();
 
+      queryClient.clear();
       navigate('/');
     } catch (error) {
       console.log(error);
