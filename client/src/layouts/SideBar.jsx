@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom';
 import {navLinks} from '@data/constants';
 import {closeSideBar, openSideBar} from '@assets';
 import NavigationLink from './NavigationLink';
+import Popup from './Popup';
 
 const SideBar = () => {
   const [open, setOpen] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <div className="hidden lg:block">
@@ -28,13 +30,19 @@ const SideBar = () => {
           ))}
         </div>
 
+        {showPopup && (
+          <div className="absolute bottom-[90px] left-5">
+            <Popup hidePopup={() => setShowPopup(!showPopup)} />
+          </div>
+        )}
+
         <div className="absolute bottom-4 left-0 w-full">
           <div className="flex w-full flex-col space-y-1.5 px-5">
             <div className="flex justify-center">
               <button
                 type="button"
                 className={`transation-border group flex w-full cursor-pointer items-center space-x-3 rounded-lg border p-2 transition-colors focus:outline-none ${!open && `border-transparent`} ${open && `border-gray-100 hover:bg-gray-50 dark:border-dark-800 hover:dark:bg-dark-800/40`}`}
-                onClick={() => {}}
+                onClick={() => setShowPopup(!showPopup)}
               >
                 <span className="relative mx-auto flex size-9 shrink-0 overflow-hidden rounded-full group-focus:ring-2">
                   <span className="size-10 bg-primary p-1.5">U</span>

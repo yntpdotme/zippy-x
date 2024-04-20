@@ -15,6 +15,8 @@ import profileIcon from './profile.svg';
 import transactionsIcon from './transactions.svg';
 import openSideBar from './open-sidebar.svg';
 import closeSideBar from './close-sidebar.svg';
+import settingsIcon from './settings.svg';
+import themeIcon from './theme.svg';
 
 export {
   sunIcon,
@@ -34,4 +36,6 @@ export {
   transactionsIcon,
   openSideBar,
   closeSideBar,
+  settingsIcon,
+  themeIcon,
 };
