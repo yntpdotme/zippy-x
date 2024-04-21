@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
+import {useCurrentUser} from '@features/users';
 import {navLinks} from '@data/constants';
 import {closeSideBar, openSideBar} from '@assets';
 import NavigationLink from './NavigationLink';
@@ -9,6 +10,8 @@ import Popup from './Popup';
 const SideBar = () => {
   const [open, setOpen] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+
+  const {data: currentUser, isError} = useCurrentUser();
 
   return (
     <div className="hidden lg:block">
@@ -45,13 +48,25 @@ const SideBar = () => {
                 onClick={() => setShowPopup(!showPopup)}
               >
                 <span className="relative mx-auto flex size-9 shrink-0 overflow-hidden rounded-full group-focus:ring-2">
-                  <span className="size-10 bg-primary p-1.5">U</span>
+                  {isError ? (
+                    <span className="flex h-full w-full items-center justify-center rounded-full bg-red-400 font-semibold uppercase text-primary-foreground">
+                      ?
+                    </span>
+                  ) : (
+                    <img src={currentUser?.avatar} alt="avatar" />
+                  )}
                 </span>
                 {open && (
                   <>
                     <div className="flex w-full flex-col truncate text-left">
                       <span className="truncate text-xs text-gray-400">
-                        {'User Name'}
+                        {isError ? (
+                          <div className="font-normal leading-tight text-red-400">
+                            Name couldn&apos;t load.
+                          </div>
+                        ) : (
+                          currentUser?.name
+                        )}
                       </span>
                     </div>
                     <svg

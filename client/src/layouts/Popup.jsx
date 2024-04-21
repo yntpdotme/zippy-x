@@ -2,6 +2,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useQueryClient} from '@tanstack/react-query';
 
 import {AuthService} from '@features/authentication';
+import {useCurrentUser} from '@features/users';
 import {dashboardIcon, settingsIcon, signOutIcon, themeIcon} from '@assets';
 import {ThemeToggler} from '@components';
 
@@ -20,6 +21,8 @@ const Popup = ({hidePopup}) => {
     }
   };
 
+  const {data: currentUser, isError} = useCurrentUser();
+
   return (
     <div className="relative min-w-[14.5rem] rounded-md border border-gray-200 bg-popover p-1 font-light text-popover-foreground shadow-lg dark:border-dark-800 dark:shadow-2xl dark:shadow-primary/40">
       <div
@@ -30,7 +33,13 @@ const Popup = ({hidePopup}) => {
         <div className="flex flex-col justify-start truncate text-left text-sm">
           <div className="text-xs text-gray-500">Signed in as</div>
           <div>
-            <span className="block truncate">user@email.com</span>
+            <span className="block truncate">
+              {isError ? (
+                <span className="text-red-400">Email couldn&apos;t load</span>
+              ) : (
+                currentUser?.email
+              )}
+            </span>
           </div>
         </div>
       </div>
