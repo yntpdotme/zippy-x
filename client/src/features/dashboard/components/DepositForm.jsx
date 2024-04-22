@@ -1,9 +1,11 @@
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 
 import {depositSchema} from '../validators';
+import {snackbarState, formSubmissionState} from '@recoil/atoms';
 import {useCurrentUser} from '@features/users';
-import {Input} from '@components/ui';
+import {Input, FormSnackbar} from '@components/ui';
 
 const DepositForm = ({onSubmit}) => {
   const {
@@ -17,11 +19,17 @@ const DepositForm = ({onSubmit}) => {
     mode: 'onChange',
   });
 
+  const [showSnackbar, setShowSnackbar] = useRecoilState(snackbarState);
+  const setFormSubmission = useSetRecoilState(formSubmissionState);
+
   const onSubmitHandler = async data => {
     try {
+      setFormSubmission(true);
       await onSubmit(data);
       reset();
     } catch (error) {
+      setShowSnackbar(false);
+
       let errorMessage = 'An unexpected error occurred. Please try again.';
 
       if (error?.response?.data?.message) {
@@ -32,6 +40,9 @@ const DepositForm = ({onSubmit}) => {
         type: 'manual',
         message: errorMessage,
       });
+    } finally {
+      setTimeout(() => setFormSubmission(false), 500);
+      setTimeout(() => setShowSnackbar(false), 2500);
     }
   };
 
@@ -61,6 +72,7 @@ const DepositForm = ({onSubmit}) => {
             <button
               className="inline-flex items-center justify-center rounded-md bg-primary bg-gradient-to-r px-6 py-3 text-sm font-medium text-white shadow-2xl transition-colors hover:bg-primary/90 focus-visible:outline-none disabled:pointer-events-none max-sm:w-full"
               disabled={!isValid}
+              onClick={() => setShowSnackbar(true)}
             >
               <span className="font-montserrat">Add Money</span>
             </button>
@@ -97,6 +109,15 @@ const DepositForm = ({onSubmit}) => {
           You
         </div>
       </div>
+
+      {showSnackbar && (
+        <FormSnackbar
+          labels={{
+            loading: 'Processing...',
+            success: 'Amount deposited successfully',
+          }}
+        />
+      )}
     </>
   );
 };

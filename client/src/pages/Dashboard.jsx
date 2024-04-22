@@ -1,4 +1,4 @@
-import {useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
 import {WalletService} from '@features/wallet';
 import {GainIndicator, DepositForm} from '@features/dashboard';
@@ -9,6 +9,15 @@ const Dashboard = () => {
     queryFn: async () => {
       const response = await WalletService.getBalance();
       return response.data.data;
+    },
+  });
+
+  const queryClient = useQueryClient();
+
+  const depositMutation = useMutation({
+    mutationFn: WalletService.deposit,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['balance']});
     },
   });
 
@@ -31,7 +40,7 @@ const Dashboard = () => {
 
         {isLoading ? (
           <div>
-            <div className="inline-block size-8 animate-spin rounded-full border-[5px] border-gray-200 border-t-primary dark:border-gray-600 dark:border-t-primary mt-2"></div>
+            <div className="mt-2 inline-block size-8 animate-spin rounded-full border-[5px] border-gray-200 border-t-primary dark:border-gray-600 dark:border-t-primary"></div>
             <span className="sr-only">Loading...</span>
           </div>
         ) : isError ? (
@@ -55,7 +64,7 @@ const Dashboard = () => {
         <p className="font-montserrat text-gray-500 dark:text-gray-400">
           Add money to your Wallet
         </p>
-        <DepositForm onSubmit={() => {}} />
+        <DepositForm onSubmit={depositMutation.mutateAsync} />
       </div>
     </section>
   );
