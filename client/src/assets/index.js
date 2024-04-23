@@ -17,6 +17,7 @@ import openSideBar from './open-sidebar.svg';
 import closeSideBar from './close-sidebar.svg';
 import settingsIcon from './settings.svg';
 import themeIcon from './theme.svg';
+import payIcon from './payment.svg';
 
 export {
   sunIcon,
@@ -38,4 +39,5 @@ export {
   closeSideBar,
   settingsIcon,
   themeIcon,
+  payIcon,
 };

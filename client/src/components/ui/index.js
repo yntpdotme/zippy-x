@@ -4,6 +4,7 @@ import Input from './Input';
 import InputPassword from './InputPassword';
 import ErrorSnackbar from './ErrorSnackbar';
 import FormSnackbar from './FormSnackbar';
+import InputSearch from './InputSearch';
 
 export {
   Button,
@@ -12,4 +13,5 @@ export {
   InputPassword,
   ErrorSnackbar,
   FormSnackbar,
+  InputSearch,
 };
