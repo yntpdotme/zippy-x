@@ -1,10 +1,12 @@
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useEffect} from 'react';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 
-import {closeIcon} from '@assets';
+import {snackbarState, formSubmissionState} from '@recoil/atoms';
 import {transferSchema} from '../validators';
-import {Input, Button} from '@components/ui';
+import {Input, Button, FormSnackbar} from '@components/ui';
+import {closeIcon} from '@assets';
 
 const TransferDialog = ({user, label, onSubmit, onClose}) => {
   const {
@@ -23,13 +25,18 @@ const TransferDialog = ({user, label, onSubmit, onClose}) => {
     setFocus('amount');
   }, [setFocus]);
 
+  const [showSnackbar, setShowSnackbar] = useRecoilState(snackbarState);
+  const setFormSubmission = useSetRecoilState(formSubmissionState);
+
   const onSubmitHandler = async data => {
     try {
+      setFormSubmission(true);
       await onSubmit(data);
       reset();
-      onClose();
+      setTimeout(onClose, 1500);
     } catch (error) {
-      console.log(error);
+      setShowSnackbar(false);
+
       let errorMessage = 'An unexpected error occurred. Please try again.';
 
       if (error.message) {
@@ -40,6 +47,9 @@ const TransferDialog = ({user, label, onSubmit, onClose}) => {
         type: 'manual',
         message: errorMessage,
       });
+    } finally {
+      setTimeout(() => setFormSubmission(false), 500);
+      setTimeout(() => setShowSnackbar(false), 1500);
     }
   };
 
@@ -103,6 +113,7 @@ const TransferDialog = ({user, label, onSubmit, onClose}) => {
                     label="Transfer"
                     roundedCorners="md"
                     isDisabled={!isValid}
+                    onClick={() => setShowSnackbar(true)}
                   />
                 </div>
 
@@ -132,6 +143,15 @@ const TransferDialog = ({user, label, onSubmit, onClose}) => {
           </button>
         </div>
       </div>
+
+      {showSnackbar && (
+        <FormSnackbar
+          labels={{
+            loading: 'Transferring...',
+            success: 'Transfer successful',
+          }}
+        />
+      )}
     </>
   );
 };
