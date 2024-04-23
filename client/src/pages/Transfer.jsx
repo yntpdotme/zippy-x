@@ -1,8 +1,28 @@
+import {useState} from 'react';
+import {useQuery, keepPreviousData} from '@tanstack/react-query';
+
+import {useDebounce} from '@hooks';
+import {UserService} from '@features/users';
 import {InputSearch} from '@components/ui';
 import {UsersTable} from '@features/users';
 
 const Transfer = () => {
-  const handleSearchInputChange = () => {};
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search);
+
+  const query = useQuery({
+    queryKey: ['users', {search: debouncedSearch}, {page}],
+    queryFn: async () => {
+      const response = await UserService.getAllUsers(debouncedSearch, page);
+      return response.data.data;
+    },
+    placeholderData: keepPreviousData,
+  });
+
+  const handleSearchInputChange = e => {
+    setSearch(e.target.value);
+  };
 
   return (
     <section className="px-2 pt-6 lg:p-6">
@@ -27,7 +47,7 @@ const Transfer = () => {
 
         <div className="rounded-md border border-x-gray-200 p-1 dark:border-dark-800">
           <div className="w-full overflow-auto">
-            <UsersTable />
+            <UsersTable query={query} setPage={setPage} />
           </div>
         </div>
       </div>
