@@ -1,3 +1,5 @@
 import UsersTable from './UsersTable';
+import UpdateProfileForm from './UpdateProfileForm';
+import UpdatePasswordForm from './UpdatePasswordForm';
 
-export {UsersTable};
+export {UsersTable, UpdateProfileForm, UpdatePasswordForm};

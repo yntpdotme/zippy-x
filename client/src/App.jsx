@@ -10,6 +10,7 @@ import {
   Transactions,
   Profile,
 } from '@pages';
+import {UpdatePassword} from '@features/users';
 import {ThemeToggler, SourceCode} from '@components';
 import {sourceCodeLink} from '@data/constants';
 import {githubLogo} from '@assets';
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/transfer" element={<Transfer />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/password" element={<UpdatePassword />} />
           </Routes>
 
           {!renderNavigation && (
