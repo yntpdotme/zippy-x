@@ -1,6 +1,17 @@
-import {UpdateProfileForm} from '@features/users';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+
+import {UserService, UpdateProfileForm} from '@features/users';
 
 const ProfilePage = () => {
+  const queryClient = useQueryClient();
+
+  const currentUserMutation = useMutation({
+    mutationFn: UserService.updateUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['currentUser']});
+    },
+  });
+
   return (
     <section className="px-2 pt-6 lg:p-6">
       <div className="flex w-full flex-col items-center space-x-2 lg:items-start lg:space-x-0">
@@ -13,7 +24,7 @@ const ProfilePage = () => {
         </h5>
 
         <div className="mt-4 w-full xl:max-w-2xl">
-          <UpdateProfileForm />
+          <UpdateProfileForm onSubmit={currentUserMutation.mutateAsync} />
         </div>
       </div>
     </section>

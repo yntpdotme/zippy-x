@@ -1,10 +1,12 @@
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Link} from 'react-router-dom';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 
 import {updateProfileSchema} from '../validators';
+import {snackbarState, formSubmissionState} from '@recoil/atoms';
 import {useCurrentUser} from '@features/users';
-import {Input} from '@components/ui';
+import {Input, Button, FormSnackbar} from '@components/ui';
 
 const UpdateProfileForm = ({onSubmit}) => {
   const {
@@ -18,6 +20,9 @@ const UpdateProfileForm = ({onSubmit}) => {
     mode: 'onChange',
   });
 
+  const [showSnackbar, setShowSnackbar] = useRecoilState(snackbarState);
+  const setFormSubmission = useSetRecoilState(formSubmissionState);
+
   const {data: currentUser} = useCurrentUser();
 
   const onSubmitHandler = async data => {
@@ -26,9 +31,12 @@ const UpdateProfileForm = ({onSubmit}) => {
         throw new Error(`Profile update for guest users is not permitted`);
       }
 
+      setFormSubmission(true);
       await onSubmit(data);
       reset();
     } catch (error) {
+      setShowSnackbar(false);
+
       let errorMessage = 'An unexpected error occurred. Please try again.';
 
       if (error.message) {
@@ -43,13 +51,16 @@ const UpdateProfileForm = ({onSubmit}) => {
         type: 'manual',
         message: errorMessage,
       });
+    } finally {
+      setTimeout(() => setFormSubmission(false), 500);
+      setTimeout(() => setShowSnackbar(false), 2500);
     }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmitHandler)} className="mt-6">
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-5">
           <div className="flex flex-col space-y-1">
             <label
               className="w-full text-sm font-medium text-gray-400"
@@ -66,30 +77,22 @@ const UpdateProfileForm = ({onSubmit}) => {
             />
           </div>
 
-          <div>
-            <button
-              type="button"
-              tabIndex="-1"
-              className="inline-flex items-center justify-center rounded-md px-3 font-palanquin text-sm font-normal ring-offset-background transition-colors hover:bg-accent/50 hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              <Link
-                className="flex h-full w-full items-center transition-transform duration-500 ease-out"
-                to="/profile/password"
-              >
-                <span className="flex w-full flex-1 items-center justify-center">
-                  Update Password
-                </span>
-              </Link>
-            </button>
-          </div>
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="w-full sm:w-fit">
+              <Button
+                label="Update Profile"
+                onClick={() => setShowSnackbar(true)}
+                isDisabled={!isValid}
+                fullWidth
+              />
+            </div>
 
-          <div>
-            <button
-              className="inline-flex items-center justify-center rounded-md bg-primary bg-gradient-to-r px-6 py-3 text-sm font-medium text-white shadow-2xl transition-colors hover:bg-primary/90 focus-visible:outline-none disabled:pointer-events-none max-sm:w-full"
-              disabled={!isValid}
+            <Link
+              className="flex w-full items-center transition-transform duration-500 ease-out sm:w-fit"
+              to="/profile/password"
             >
-              <span className="font-montserrat">Update Profile</span>
-            </button>
+              <Button variant="secondary" label="Update Password" fullWidth />
+            </Link>
           </div>
 
           {errors.message && (
@@ -99,6 +102,15 @@ const UpdateProfileForm = ({onSubmit}) => {
           )}
         </div>
       </form>
+
+      {showSnackbar && (
+        <FormSnackbar
+          labels={{
+            loading: 'Updating Name...',
+            success: 'Name updated successfully',
+          }}
+        />
+      )}
     </>
   );
 };

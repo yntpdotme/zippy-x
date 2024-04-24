@@ -1,9 +1,11 @@
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 
 import {updatePasswordSchema} from '../validators';
+import {snackbarState, formSubmissionState} from '@recoil/atoms';
 import {useCurrentUser} from '@features/users';
-import {Input, InputPassword} from '@components/ui';
+import {Input, InputPassword, Button, FormSnackbar} from '@components/ui';
 
 const UpdatePasswordForm = ({onSubmit}) => {
   const {
@@ -17,6 +19,9 @@ const UpdatePasswordForm = ({onSubmit}) => {
     mode: 'onChange',
   });
 
+  const [showSnackbar, setShowSnackbar] = useRecoilState(snackbarState);
+  const setFormSubmission = useSetRecoilState(formSubmissionState);
+
   const {data: currentUser} = useCurrentUser();
 
   const onSubmitHandler = async data => {
@@ -24,9 +29,13 @@ const UpdatePasswordForm = ({onSubmit}) => {
       if (currentUser?.email === 'guest@email.com') {
         throw new Error(`Password update for guest users is not permitted`);
       }
+
+      setFormSubmission(true);
       await onSubmit(data);
       reset();
     } catch (error) {
+      setShowSnackbar(false);
+
       let errorMessage = 'An unexpected error occurred. Please try again.';
 
       if (error.message) {
@@ -41,12 +50,15 @@ const UpdatePasswordForm = ({onSubmit}) => {
         type: 'manual',
         message: errorMessage,
       });
+    } finally {
+      setTimeout(() => setFormSubmission(false), 500);
+      setTimeout(() => setShowSnackbar(false), 2500);
     }
   };
   return (
     <>
       <form onSubmit={handleSubmit(onSubmitHandler)} className="mt-6">
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-5">
           <div className="flex flex-col space-y-1">
             <label
               className="w-full text-sm font-medium text-gray-400"
@@ -95,13 +107,13 @@ const UpdatePasswordForm = ({onSubmit}) => {
             />
           </div>
 
-          <div>
-            <button
-              className="inline-flex items-center justify-center rounded-md bg-primary bg-gradient-to-r px-6 py-3 text-sm font-medium text-white shadow-2xl transition-colors hover:bg-primary/90 focus-visible:outline-none disabled:pointer-events-none max-sm:w-full"
-              disabled={!isValid}
-            >
-              <span className="font-montserrat">Update Password</span>
-            </button>
+          <div className="w-full sm:w-fit">
+            <Button
+              label="Update Password"
+              onClick={() => setShowSnackbar(true)}
+              isDisabled={!isValid}
+              fullWidth
+            />
           </div>
 
           {errors.message && (
@@ -111,6 +123,15 @@ const UpdatePasswordForm = ({onSubmit}) => {
           )}
         </div>
       </form>
+
+      {showSnackbar && (
+        <FormSnackbar
+          labels={{
+            loading: 'Updating Password...',
+            success: 'Password updated successfully',
+          }}
+        />
+      )}
     </>
   );
 };
