@@ -1,4 +1,4 @@
 import TransferDialog from './TransferDialog';
-import TransactionsTable from './TansactionsTable';
+import TransactionsTable from './TransactionsTable';
 
 export {TransferDialog, TransactionsTable};
