@@ -1,4 +1,4 @@
 import WalletService from './services/wallet.service';
-import {TransferDialog} from './component/index';
+import {TransferDialog, TransactionsTable} from './component';
 
-export {WalletService, TransferDialog};
+export {WalletService, TransferDialog, TransactionsTable};
