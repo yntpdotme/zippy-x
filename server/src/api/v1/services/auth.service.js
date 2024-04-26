@@ -103,6 +103,21 @@ const signOutUser = id => {
   );
 };
 
+const getAuthStatus = accessToken => {
+  if (!accessToken) return false;
+
+  try {
+    const decodedToken = jwt.verify(
+      accessToken,
+      process.env.accessToken_TOKEN_SECRET
+    );
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 const refreshAccessToken = async refreshToken => {
   if (!refreshToken) {
     throw new ApiError(401, 'Unauthorized request');
@@ -148,6 +163,7 @@ export const authService = {
   register: registerUser,
   signIn: signInUser,
   signOut: signOutUser,
+  authStatus: getAuthStatus,
   refreshToken: refreshAccessToken,
   socialSignIn: handleSocialSignIn,
 };

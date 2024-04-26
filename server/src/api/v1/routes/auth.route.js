@@ -28,7 +28,7 @@ router
 
 router
   .route('/status')
-  .get(authorization, getAuthStatus)
+  .get(getAuthStatus)
 
 router
   .route('/refresh')

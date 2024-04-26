@@ -77,11 +77,14 @@ const unauthenticateUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, 'User Signed out'));
 });
 
-const getAuthStatus = (req, res) => {
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {authenticated: true}, 'Success'));
-};
+const getAuthStatus = asyncHandler((req, res) => {
+  const token =
+    req.cookies?.accessToken || req.headers['authorization']?.split(' ')[1];
+
+  const authenticated = authService.authStatus(token);
+
+  return res.status(200).json(new ApiResponse(200, {authenticated}, 'Fetched auth status'));
+});
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
