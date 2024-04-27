@@ -1,12 +1,15 @@
 import {useNavigate} from 'react-router-dom';
 
+import {useAuthStatus} from '@hooks';
 import {Button, BackgroundCircles} from '@components/ui';
 import {rightArrow, wallet} from '@assets';
 
 const Home = () => {
   const navigate = useNavigate();
+  const {data: isAuthenticated} = useAuthStatus();
+
   const handleSetStarted = () => {
-    navigate('/signin');
+    isAuthenticated ? navigate('/dashboard') : navigate('/signin');
   };
 
   return (

@@ -1,5 +1,7 @@
-import {Route, Routes, useLocation} from 'react-router-dom';
+import {Route, Routes, useLocation, useNavigate} from 'react-router-dom';
+import {useEffect} from 'react';
 
+import {useAuthStatus} from '@hooks';
 import {NavBar, SideBar} from '@layouts';
 import {
   Home,
@@ -17,10 +19,18 @@ import {githubLogo} from '@assets';
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const renderNavigation = !['/', '/signin', '/signup'].includes(
     location.pathname,
   );
+
+  const {data: isAuthenticated} = useAuthStatus();
+
+  useEffect(() => {
+    if (['/', '/signin', '/signup'].includes(location.pathname)) return;
+    if (!isAuthenticated) navigate('/');
+  }, [location, isAuthenticated, navigate]);
 
   return (
     <>

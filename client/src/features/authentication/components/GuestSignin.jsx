@@ -1,3 +1,4 @@
+import {useQueryClient} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
 
@@ -6,6 +7,7 @@ import {AuthService} from '@features/authentication';
 import {Button, ErrorSnackbar} from '@components/ui';
 
 const GuestSignin = ({label}) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [showSnackbar, setShowSnackbar] = useRecoilState(snackbarState);
 
@@ -17,6 +19,7 @@ const GuestSignin = ({label}) => {
       };
 
       await AuthService.signin(formData);
+      queryClient.setQueryData(['authStatus'], true);
 
       navigate('/dashboard');
     } catch (error) {

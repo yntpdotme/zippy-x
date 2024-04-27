@@ -1,3 +1,4 @@
+import {useQueryClient} from '@tanstack/react-query';
 import {Link, useNavigate} from 'react-router-dom';
 
 import {
@@ -8,10 +9,12 @@ import {
 } from '@features/authentication';
 
 const Signin = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const handleSignin = async formData => {
     await AuthService.signin(formData);
+    queryClient.setQueryData(['authStatus'], true);
 
     navigate('/dashboard');
   };
