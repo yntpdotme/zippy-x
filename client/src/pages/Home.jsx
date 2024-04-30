@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <section className="max-container relative flex h-screen flex-col items-center justify-center overflow-hidden px-1 md:flex-row-reverse">
-      <p className="absolute left-5 top-10 animate-pulse font-montserrat xl:left-0">
+      <p className="absolute left-5 top-10 animate-pulse font-montserrat">
         From{' '}
         <a href="https://linktr.ee/kadlagakash" target="_blank">
           <span className="font-medium">Akash Kadlag</span>
