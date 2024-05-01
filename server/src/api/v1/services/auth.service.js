@@ -109,11 +109,13 @@ const getAuthStatus = accessToken => {
   try {
     const decodedToken = jwt.verify(
       accessToken,
-      process.env.accessToken_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET
     );
 
     return true;
   } catch (error) {
+    console.log(error?.message);
+
     return false;
   }
 };
