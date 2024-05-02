@@ -42,7 +42,7 @@ const GuestSignin = ({label}) => {
       <Button
         onClick={handleGuestSignIn}
         variant="secondary"
-        label={label || 'Sign In as Guest'}
+        label={label || 'Sign in as Guest'}
         fullWidth
       />
 
