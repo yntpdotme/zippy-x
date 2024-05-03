@@ -17,7 +17,7 @@
 
 <h2 align="center">
 
-<img src = "./assets/eyes-to-see.gif" width = 26px align="top"/> &nbsp;[See it in Action]() &nbsp;»
+<img src = "./assets/eyes-to-see.gif" width = 26px align="top"/> &nbsp;[See it in Action](https://zippy-x.vercel.app/) &nbsp;»
 
 </h2>
 
@@ -43,7 +43,7 @@
 Experience seamless transactions and effortless money transfers with ZippyX. Delve into the codebase to explore more.
 
 <br>
-<a href="/">
+<a href="https://zippy-x.vercel.app/">
   <p align=center>
     <img width = "650px" alt="Jio Network blocking the view? Network switch reveals the magic!" src="./assets/zippy-x.png">
   <p>
@@ -143,9 +143,9 @@ Experience seamless transactions and effortless money transfers with ZippyX. Del
 4. **Start all services using Docker Compose:**
 
    ```bash
-   docker-compose up
+   docker-compose up --watch
 
-   # then press 'w' to Enable Watch (For Live Update aka Hot Reloading)
+   # --watch to Enable Watch (For Live Update aka Hot Reloading)
    ```
 
 <br>
