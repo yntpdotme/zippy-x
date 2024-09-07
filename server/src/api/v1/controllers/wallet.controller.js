@@ -21,7 +21,7 @@ const getBalance = asyncHandler(async (req, res) => {
   );
 });
 
-const depositAmount = async (req, res) => {
+const depositAmount = asyncHandler(async (req, res) => {
   const {error} = ValidateDeposit(req.body);
   if (error) throw new ApiError(400, error.issues[0].message);
 
@@ -43,7 +43,7 @@ const depositAmount = async (req, res) => {
       'Deposit is successful'
     )
   );
-};
+});
 
 const transferAmount = asyncHandler(async (req, res, next) => {
   const {error} = ValidateTransfer(req.body);

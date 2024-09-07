@@ -1,7 +1,7 @@
 import {transactionService} from '../services/index.js';
-import {ApiResponse} from '../../common/utils/index.js';
+import {ApiResponse, asyncHandler} from '../../common/utils/index.js';
 
-const getAllTransactions = async (req, res) => {
+const getAllTransactions = asyncHandler(async (req, res) => {
   const {page, limit} = req.query;
 
   const { transactions, pagination } = await transactionService.getTransactions(
@@ -17,7 +17,7 @@ const getAllTransactions = async (req, res) => {
       'Transactions fetched successfully'
     )
   );
-};
+});
 
 export const transactionController = {
   getAllTransactions,
