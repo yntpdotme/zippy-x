@@ -7,6 +7,7 @@ const depositSchema = z.object({
       invalid_type_error: 'Amount must be a number',
     })
     .min(0.01, {message: 'Minimum amount must be 0.01'})
+    .max(100000, {message: 'Maximum amount must be 100000'})
     .refine(
       amount => {
         const decimalCount = (amount.toString().split('.')[1] || '').length;
