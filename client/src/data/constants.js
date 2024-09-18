@@ -1,4 +1,4 @@
-export const sourceCodeLink = 'https://github.com/KadlagAkash/zippy-x#zippy-x';
+export const sourceCodeLink = 'https://github.com/yntpdotme/zippy-x#zippy-x';
 
 import {
   dashboardIcon,
