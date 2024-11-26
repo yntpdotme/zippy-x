@@ -1,3 +1,3 @@
-import transferSchema from "./transfer";
+import transferSchema from './transfer';
 
 export {transferSchema};

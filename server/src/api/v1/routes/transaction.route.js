@@ -4,10 +4,8 @@ import {transactionController} from '../controllers/index.js';
 import {authorization} from '../../common/middlewares/index.js';
 
 const router = express.Router();
-const {getAllTransactions} = transactionController
+const {getAllTransactions} = transactionController;
 
-router
-	.route('/')
-	.get(authorization, getAllTransactions);
+router.route('/').get(authorization, getAllTransactions);
 
 export default router;

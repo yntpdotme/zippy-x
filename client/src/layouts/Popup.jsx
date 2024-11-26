@@ -77,7 +77,7 @@ const Popup = ({hidePopup}) => {
         tabIndex="-1"
         onClick={() => setTimeout(hidePopup, 500)}
       >
-        <div className="flex space-x-2.5 items-center">
+        <div className="flex items-center space-x-2.5">
           <img src={themeIcon} className="h-5 dark:invert dark:filter" />
           <span>Theme</span>
         </div>

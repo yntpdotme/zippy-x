@@ -31,7 +31,6 @@
 <p>
 <br>
 
-
 <p align=center>
   <img alt="Jio Network blocking the view? Network switch reveals the magic!" src="./src/assets/ui-2-light.png">
 <p>
@@ -53,13 +52,13 @@
 
 3. **Add Environment Variables:**
 
-    Create `.env` file in the root folder and copy paste the content of `.env.sample`
+   Create `.env` file in the root folder and copy paste the content of `.env.sample`
 
-    ```bash
-    cp .env.sample .env
-    ```
+   ```bash
+   cp .env.sample .env
+   ```
 
-    If required, update necessary credentials.
+   If required, update necessary credentials.
 
 4. **Start the frontend app:**
 

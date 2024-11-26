@@ -1,3 +1,3 @@
-import healthCheckRouter from './healthcheck.route.js'
+import healthCheckRouter from './healthcheck.route.js';
 
 export {healthCheckRouter};

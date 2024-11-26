@@ -7,9 +7,7 @@ const {getAllUsers, getCurrentUser, updateCurrentUser} = userController;
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(authorization, getAllUsers);
+router.route('/').get(authorization, getAllUsers);
 
 router
   .route('/me')

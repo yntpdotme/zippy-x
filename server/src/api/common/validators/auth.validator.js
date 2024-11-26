@@ -22,7 +22,7 @@ const userRegisterValidator = user => {
         .string({required_error: 'Password is required'})
         .min(
           6,
-          'Password must have at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character.'
+          'Password must have at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character.',
         )
         .refine(password => {
           // At least one uppercase letter, one lowercase letter, one digit, and one special character

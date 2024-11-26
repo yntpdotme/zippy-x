@@ -13,13 +13,13 @@ const registerUser = asyncHandler(async (req, res) => {
   const {user, accessToken, refreshToken} = await authService.register(
     name,
     email,
-    password
+    password,
   );
 
   const options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none'
+    sameSite: 'none',
   };
 
   return res
@@ -30,8 +30,8 @@ const registerUser = asyncHandler(async (req, res) => {
       new ApiResponse(
         201,
         {user, accessToken, refreshToken},
-        'User registered successfully'
-      )
+        'User registered successfully',
+      ),
     );
 });
 
@@ -43,13 +43,13 @@ const authenticateUser = asyncHandler(async (req, res) => {
 
   const {user, accessToken, refreshToken} = await authService.signIn(
     email,
-    password
+    password,
   );
 
   const options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none'
+    sameSite: 'none',
   };
 
   return res
@@ -59,8 +59,8 @@ const authenticateUser = asyncHandler(async (req, res) => {
       new ApiResponse(
         200,
         {user, accessToken, refreshToken},
-        'User signed in successfully'
-      )
+        'User signed in successfully',
+      ),
     );
 });
 
@@ -70,7 +70,7 @@ const unauthenticateUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none'
+    sameSite: 'none',
   };
 
   return res
@@ -86,21 +86,22 @@ const getAuthStatus = asyncHandler((req, res) => {
 
   const authenticated = authService.authStatus(token);
 
-  return res.status(200).json(new ApiResponse(200, {authenticated}, 'Fetched auth status'));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {authenticated}, 'Fetched auth status'));
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
 
-  const {accessToken, newRefreshToken} = await authService.refreshToken(
-    incomingRefreshToken
-  );
+  const {accessToken, newRefreshToken} =
+    await authService.refreshToken(incomingRefreshToken);
 
   const options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none'
+    sameSite: 'none',
   };
 
   return res
@@ -116,13 +117,13 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 const handleSocialSignIn = asyncHandler(async (req, res) => {
   const {accessToken, refreshToken} = await authService.socialSignIn(
-    req.user?._id
+    req.user?._id,
   );
 
   const options = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none'
+    sameSite: 'none',
   };
 
   return res
@@ -131,7 +132,7 @@ const handleSocialSignIn = asyncHandler(async (req, res) => {
     .cookie('refreshToken', refreshToken, options)
     .redirect(
       // redirect user to the frontend with access and refresh token in case user is not using cookies
-      `${process.env.CLIENT_SSO_REDIRECT_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}`
+      `${process.env.CLIENT_SSO_REDIRECT_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}`,
     );
 });
 

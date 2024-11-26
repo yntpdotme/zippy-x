@@ -4,7 +4,7 @@ const SourceCode = ({link, icon}) => {
       <img
         src={icon}
         alt="SourceCode Icon"
-        className="md:h-18 h-12 dark:animate-pulse hover:drop-shadow-[-0.2rem_0_1rem_#f0f0f0] dark:invert dark:filter lg:h-14 xl:h-16"
+        className="md:h-18 h-12 hover:drop-shadow-[-0.2rem_0_1rem_#f0f0f0] dark:animate-pulse dark:invert dark:filter lg:h-14 xl:h-16"
       />
     </a>
   );

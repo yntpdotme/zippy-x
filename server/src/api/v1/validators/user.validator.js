@@ -24,7 +24,7 @@ const userUpdateValidator = user => {
         .string({required_error: 'New Password is required'})
         .min(
           6,
-          'Password must have at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character.'
+          'Password must have at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character.',
         )
         .refine(password => {
           // At least one uppercase letter, one lowercase letter, one digit, and one special character
@@ -46,7 +46,7 @@ const userUpdateValidator = user => {
       {
         message: 'Passwords do not match',
         path: ['confirmNewPassword'],
-      }
+      },
     );
 
   const schema = z
@@ -68,7 +68,7 @@ const userUpdateValidator = user => {
         .string({required_error: 'New Password is required'})
         .min(
           6,
-          'Password must have at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character.'
+          'Password must have at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character.',
         )
         .refine(password => {
           // At least one uppercase letter, one lowercase letter, one digit, and one special character
@@ -90,7 +90,7 @@ const userUpdateValidator = user => {
       {
         message: 'Passwords do not match',
         path: ['confirmNewPassword'],
-      }
+      },
     );
 
   if (!user.name) {

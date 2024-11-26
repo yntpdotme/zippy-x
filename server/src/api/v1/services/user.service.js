@@ -35,7 +35,7 @@ const updateCurrentUser = async (userId, userData) => {
       // If the user is registered with a method other than Email-Password, changing the password is not applicable
       throw new ApiError(
         400,
-        `Changing the password is not applicable for accounts registered with ${user.signInType}.`
+        `Changing the password is not applicable for accounts registered with ${user.signInType}.`,
       );
     }
 
@@ -51,7 +51,7 @@ const updateCurrentUser = async (userId, userData) => {
     user.name = name;
     if (user.signInType === 'Email-Password') {
       user.avatar = `https://ui-avatars.com/api/?name=${getAvatarName(
-        name
+        name,
       )}&size=250&background=4d2be2&color=ffffff`;
     }
   }

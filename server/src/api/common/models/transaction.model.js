@@ -21,7 +21,7 @@ const transactionSchema = new mongoose.Schema(
       set: amount => Math.round(amount * 100),
     },
   },
-  {timestamps: true}
+  {timestamps: true},
 );
 
 transactionSchema.virtual('amountINR').get(function () {

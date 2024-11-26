@@ -12,7 +12,7 @@ const authorization = asyncHandler(async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const user = await User.findById(decodedToken?._id).select(
-      '-password -refreshToken -__v'
+      '-password -refreshToken -__v',
     );
     req.user = user;
 

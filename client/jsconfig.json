@@ -11,7 +11,7 @@
       "@layouts": ["/src/layouts/*"],
       "@pages": ["/src/pages/*"],
       "@services": ["/src/services/*"],
-      "@recoil": ["/src/recoil/*"],
+      "@recoil": ["/src/recoil/*"]
     }
   }
 }

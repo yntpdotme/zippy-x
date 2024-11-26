@@ -1,5 +1,5 @@
 const TableLoader = () => {
-	return (
+  return (
     <div className="mx-autorounded-md px-5 py-10 shadow">
       <div className="flex animate-pulse">
         <div className="flex-1 space-y-6">
@@ -13,6 +13,6 @@ const TableLoader = () => {
       <span className="sr-only">Loading...</span>
     </div>
   );
-}
+};
 
-export default TableLoader
+export default TableLoader;

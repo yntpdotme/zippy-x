@@ -32,7 +32,7 @@ const Signin = () => {
           </h5>
         </div>
 
-        <GoogleSignin />
+        <GuestSignin />
 
         <div>
           <span className="text-xs text-gray-400">or continue with email</span>
@@ -47,7 +47,11 @@ const Signin = () => {
           </Link>
         </p>
 
-        <GuestSignin />
+        <div>
+          <span className="text-xs text-gray-400">or continue with google</span>
+        </div>
+
+        <GoogleSignin />
       </div>
     </section>
   );

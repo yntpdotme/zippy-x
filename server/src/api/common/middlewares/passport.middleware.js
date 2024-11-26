@@ -38,9 +38,9 @@ passport.use(
             return next(
               new ApiError(
                 400,
-                `You have registered using ${signInType}. Please use ${signInType} as the signin option.`
+                `You have registered using ${signInType}. Please use ${signInType} as the signin option.`,
               ),
-              null
+              null,
             );
           } else {
             return next(null, user);
@@ -64,16 +64,16 @@ passport.use(
         else
           return next(
             new ApiError(500, 'Error while registering the user'),
-            null
+            null,
           );
       } catch (error) {
         return next(
           new ApiError(500, `Error during Google authentication: ${error}`),
-          null
+          null,
         );
       }
-    }
-  )
+    },
+  ),
 );
 
 export {passport};

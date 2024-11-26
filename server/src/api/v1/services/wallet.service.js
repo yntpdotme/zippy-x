@@ -11,7 +11,7 @@ const depositeAmount = async (userId, amount) => {
   const wallet = await Wallet.findOneAndUpdate(
     {userId: userId},
     {$inc: {balance: amount}},
-    {new: true}
+    {new: true},
   ).populate('userId');
 
   // Calculate gain
@@ -39,7 +39,7 @@ const transferAmount = async (senderId, recipientId, amount) => {
     session.startTransaction();
 
     const senderWallet = await Wallet.findOne({userId: senderId}).session(
-      session
+      session,
     );
 
     if (!senderWallet || senderWallet.balanceINR < amount) {
@@ -57,12 +57,12 @@ const transferAmount = async (senderId, recipientId, amount) => {
     // Perform the transfer
     await Wallet.updateOne(
       {userId: senderId},
-      {$inc: {balance: -amount}}
+      {$inc: {balance: -amount}},
     ).session(session);
 
     await Wallet.updateOne(
       {userId: recipientId},
-      {$inc: {balance: amount}}
+      {$inc: {balance: amount}},
     ).session(session);
 
     // Calculate gain

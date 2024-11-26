@@ -16,8 +16,8 @@ const getBalance = asyncHandler(async (req, res) => {
         currency: 'INR',
         gain: wallet.gainInBalance.slice(-1)[0],
       },
-      'Balance fetched successfully'
-    )
+      'Balance fetched successfully',
+    ),
   );
 });
 
@@ -28,7 +28,7 @@ const depositAmount = asyncHandler(async (req, res) => {
   const {amount} = req.body;
   const {wallet, gainInBalance} = await walletService.deposite(
     req.user._id,
-    amount
+    amount,
   );
 
   return res.json(
@@ -40,8 +40,8 @@ const depositAmount = asyncHandler(async (req, res) => {
         currency: 'INR',
         gain: gainInBalance,
       },
-      'Deposit is successful'
-    )
+      'Deposit is successful',
+    ),
   );
 });
 

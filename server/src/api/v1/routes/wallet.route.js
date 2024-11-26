@@ -7,16 +7,10 @@ const router = express.Router();
 
 const {getBalance, depositAmount, transferAmount} = walletController;
 
-router
-  .route('/balance')
-  .get(authorization, getBalance);
+router.route('/balance').get(authorization, getBalance);
 
-router
-  .route('/deposit')
-  .post(authorization, depositAmount);
+router.route('/deposit').post(authorization, depositAmount);
 
-router
-  .route('/transfer')
-  .post(authorization, transferAmount);
+router.route('/transfer').post(authorization, transferAmount);
 
 export default router;

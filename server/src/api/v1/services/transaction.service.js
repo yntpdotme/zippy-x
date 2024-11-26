@@ -1,14 +1,15 @@
 import {Transaction} from '../../common/models/index.js';
 import {paginateQuery} from '../../common/utils/index.js';
 
-const getAllTransactions = async (userId, page , limit) => {
-  const transactionsQuery = Transaction
-    .find({$or: [{senderId: userId}, {recipientId: userId}]})
+const getAllTransactions = async (userId, page, limit) => {
+  const transactionsQuery = Transaction.find({
+    $or: [{senderId: userId}, {recipientId: userId}],
+  })
     .populate('senderId', 'name')
     .populate('recipientId', 'name')
     .select('-__v')
-    .sort({ createdAt: -1 });
-  
+    .sort({createdAt: -1});
+
   const result = await paginateQuery(transactionsQuery, page, limit);
 
   const transactionList = result.data.map(transaction => {

@@ -19,7 +19,7 @@ const generateAccessAndRefreshTokens = async userId => {
   } catch (error) {
     throw new ApiError(
       500,
-      'Something went wrong while generating the access token'
+      'Something went wrong while generating the access token',
     );
   }
 };
@@ -29,7 +29,7 @@ const registerUser = async (name, email, password) => {
   if (user) throw new ApiError(409, 'User with email already exists');
 
   const avatar = `https://ui-avatars.com/api/?name=${getAvatarName(
-    name
+    name,
   )}&size=250&background=4d2be2&color=ffffff`;
 
   user = await User.create({
@@ -46,12 +46,12 @@ const registerUser = async (name, email, password) => {
   });
 
   const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
-    user._id
+    user._id,
   );
 
   // get the user document ignoring the password and refreshToken field
   const createdUser = await User.findById(user._id).select(
-    '-password -refreshToken -__v'
+    '-password -refreshToken -__v',
   );
 
   if (!createdUser)
@@ -70,7 +70,7 @@ const signInUser = async (email, password) => {
       he / she will not be able to login with password. Which makes password field redundant for the SSO */
     throw new ApiError(
       400,
-      `You have registered using ${user.signInType}. Please use ${user.signInType} as the signin option.`
+      `You have registered using ${user.signInType}. Please use ${user.signInType} as the signin option.`,
     );
   }
 
@@ -80,12 +80,12 @@ const signInUser = async (email, password) => {
   }
 
   const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
-    user._id
+    user._id,
   );
 
   // get the user document ignoring the password and refreshToken field
   const signedInUser = await User.findById(user._id).select(
-    '-password -refreshToken -__v'
+    '-password -refreshToken -__v',
   );
 
   return {user: signedInUser, accessToken, refreshToken};
@@ -99,7 +99,7 @@ const signOutUser = id => {
         refreshToken: '',
       },
     },
-    {new: true}
+    {new: true},
   );
 };
 
@@ -109,7 +109,7 @@ const getAuthStatus = accessToken => {
   try {
     const decodedToken = jwt.verify(
       accessToken,
-      process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET,
     );
 
     return true;
@@ -128,7 +128,7 @@ const refreshAccessToken = async refreshToken => {
   try {
     const decodedToken = jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET
+      process.env.REFRESH_TOKEN_SECRET,
     );
 
     const user = await User.findById(decodedToken?._id);
@@ -154,9 +154,8 @@ const handleSocialSignIn = async userId => {
   const user = await User.findById(userId);
   if (!user) throw new ApiError(404, 'User does not exists');
 
-  const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(
-    userId
-  );
+  const {accessToken, refreshToken} =
+    await generateAccessAndRefreshTokens(userId);
 
   return {accessToken, refreshToken};
 };

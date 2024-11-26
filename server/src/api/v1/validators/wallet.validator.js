@@ -14,7 +14,7 @@ const walletDepositValidator = transaction => {
           const decimalCount = (amount.toString().split('.')[1] || '').length;
           return decimalCount <= 2;
         },
-        {message: 'Amount must have up to two decimal digits'}
+        {message: 'Amount must have up to two decimal digits'},
       ),
   });
 
@@ -35,7 +35,7 @@ const walletTransferValidator = transaction => {
           const decimalCount = (amount.toString().split('.')[1] || '').length;
           return decimalCount <= 2;
         },
-        {message: 'Amount must have up to two decimal digits'}
+        {message: 'Amount must have up to two decimal digits'},
       ),
 
     recipientId: z

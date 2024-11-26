@@ -10,7 +10,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
   const {users, pagination} = await userService.getUsers(filter, page, limit);
 
   return res.json(
-    new ApiResponse(200, {users, pagination}, 'Users fetched successfully')
+    new ApiResponse(200, {users, pagination}, 'Users fetched successfully'),
   );
 });
 
@@ -18,7 +18,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
   const currentUser = await userService.getUser(req.user._id);
 
   return res.json(
-    new ApiResponse(200, {currentUser}, 'User fetched successfully')
+    new ApiResponse(200, {currentUser}, 'User fetched successfully'),
   );
 });
 
@@ -31,7 +31,7 @@ const updateCurrentUser = asyncHandler(async (req, res) => {
   return res
     .status(201)
     .json(
-      new ApiResponse(201, {user: updatedUser}, 'User updated successfully')
+      new ApiResponse(201, {user: updatedUser}, 'User updated successfully'),
     );
 });
 
